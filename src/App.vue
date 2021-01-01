@@ -1,32 +1,76 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view/>
   </div>
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+:root {
+  --yellow: #ffc618;
+  --pink:#EF8EBC;
+  --purple:#823AD9;
+  --pink-dark: #c4749a;
+  --gray:#ddd;
+
+}
+*{
+  box-sizing: 0;
+  margin: 0;
 }
 
-#nav {
-  padding: 30px;
+body{
+  font-family: Helvetica;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.title{
+  font-size: 40px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-weight: bolder;
+  color: var(--purple);
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+label,input,button{
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+button{
+  width: 100%;
+  background-color: var(--pink);
+  outline: none;
+  border: none;
+  color: white;
+  padding: 4px;
+  cursor: pointer;
+}
+button:hover{
+  background-color: var(--pink-dark);
+}
+button:active{
+  background-color: var(--pink);
+}
+input{
+  background-color: rgba(0,0,0,0);
+  outline: none;
+  border: none;
+  border-bottom: 2px solid white;
+}
+input:focus{
+  border-bottom: 2px solid var(--purple);
+}
+
+.nineSixteen{
+  width: calc(50px * 9/16);
+}
+.sixteenTen{
+  width: calc(50px * 16/10);
+}
+
+.fourThree{
+  width: calc(50px * 4/3);
+}
+
+.sevenFive{
+  width: calc(50px * 5/7);
 }
 </style>
