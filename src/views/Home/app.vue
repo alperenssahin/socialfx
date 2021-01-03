@@ -37,7 +37,7 @@
               <br><br>
             </label>
 
-            <button>Next</button>
+            <button @click="state++">Next</button>
           </div>
           <div class="posts">
               <Generator :title="title"
@@ -50,6 +50,9 @@
                          :height="500"></Generator>
           </div>
         </div>
+      <div class="scheduler" v-if="state === 2">
+        <Scheduler :social-media="socialMedia" :set-timeout="setTimeOut"></Scheduler>
+      </div>
     </div>
     <div v-else>
       <div class="new-post" @click="process = true">
@@ -64,13 +67,14 @@
 <script>
 import SocialMediaPicker from "@/components/SocialMediaPicker";
 import Generator from "@/components/Generator";
+import Scheduler from "@/components/Scheduler";
 export default {
   name: "app",
-  components: {Generator, SocialMediaPicker},
+  components: {Scheduler, Generator, SocialMediaPicker},
   data:function (){
     return{
-      process:true,
-      state:1,
+      process:false,
+      state:0,
       title:"Halloween Party",
       subtitle:"01.01.2021 | Saat : 23.00",
       info:"Ticket : 30₺ | BESIKTAS",
@@ -78,13 +82,25 @@ export default {
       overlayColor:"rgba(255,255,255,0.5)",
       background:null,
       socialMedia:{
-        "16:10":true,
-        "9:16":true,
-        "4:3":true,
-        "5:7":true
+        "16:10":false,
+        "9:16":false,
+        "4:3":false,
+        "5:7":false
       },
     }
   },methods:{
+    setTimeOut(){
+      setTimeout(()=>{
+        this.process = false;
+        this.state = 0;
+        this.socialMedia = {
+          "16:10":false,
+              "9:16":false,
+              "4:3":false,
+              "5:7":false
+        }
+      },5000);
+    },
     imageLoadHandler(ev){
       let img = new Image;
       let canvas = document.createElement("canvas");

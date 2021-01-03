@@ -58,6 +58,9 @@ export default {
 </script>
 
 <style scoped>
+  *{
+    line-height: normal;
+  }
   .generator-box{
     padding: 20px;
   }

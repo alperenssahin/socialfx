@@ -3,8 +3,9 @@
     <img src="@/assets/logo.png">
     <div class="links">
       <router-link class="s-link" to="/home/app">Create</router-link>
+      <router-link  class="s-link"  to="/home/dashboard">Dashboard</router-link>
       <router-link  class="s-link"  to="/home/blog">Blog</router-link>
-      <router-link  class="s-link"  to="/home/profile">Profile</router-link>
+
     </div>
   </div>
 </template>
@@ -41,15 +42,15 @@ export default {
 }
 .s-link {
   font-size: 20px!important;
-  text-decoration: none;
-  color: var(--purple);
+  text-decoration: none !important;
+  color: var(--purple) !important;
   font-weight: bolder;
   padding: 10px;
 }
 
 .router-link-active{
   background-color: var(--pink);
-  color: white;
+  color: white !important;
   border-radius: 10px;
 }
 </style>
