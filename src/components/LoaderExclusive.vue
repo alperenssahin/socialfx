@@ -10,28 +10,17 @@
 
 <script>
 export default {
-  name: "Loader",props:{progressArray:Array},
+  name: "LoaderExclusive",props:{text:String,progress:Number},
   data(){
     return{
-      text:"Authentication Checked",
-      progress:10,
       current:1,
     }
   },
   methods:{
-    callTimeOut(obj){
-      setTimeout(()=>{
-        this.text =obj.text;
-        this.progress = obj.progress;
-        if(this.current < this.progressArray.length){
-          this.callTimeOut(this.progressArray[this.current])
-          this.current++;
-        }
-      },obj.timeout);
-    }
+
   },
   mounted() {
-    this.callTimeOut(this.progressArray[0]);
+
   }
 }
 </script>

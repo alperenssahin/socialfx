@@ -20,9 +20,14 @@ const routes = [
         component: () => import(/* webpackChunkName: "App" */ '../views/Home/app')
       },
       {
-        path: 'dashboard',
+        path: 'profile',
         name: 'Profile',
         component: () => import(/* webpackChunkName: "Profile" */ '../views/Home/profile')
+      },
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: () => import(/* webpackChunkName: "Dashboard" */ '../views/Home/dashboard')
       }
     ]
   },
@@ -30,6 +35,11 @@ const routes = [
     path: '/',
     name: 'Login',
     component: () => import(/* webpackChunkName: "Login" */ '../views/Login')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import(/* webpackChunkName: "Register" */ '../views/Register')
   }
 ]
 

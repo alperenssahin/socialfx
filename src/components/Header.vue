@@ -5,7 +5,8 @@
       <router-link class="s-link" to="/home/app">Create</router-link>
       <router-link  class="s-link"  to="/home/dashboard">Dashboard</router-link>
       <router-link  class="s-link"  to="/home/blog">Blog</router-link>
-
+      <router-link class="s-link" to="/home/profile">{{$store.state.username}}</router-link>
+      <router-link class="s-link cikis" to="/">Çıkış</router-link>
     </div>
   </div>
 </template>
@@ -28,6 +29,9 @@ export default {
   grid-template-columns: auto 1fr;
   align-items: center;
 }
+.cikis{
+  background-color: #823AD9!important;
+}
 
 .header img{
   height: 50px;
@@ -35,7 +39,7 @@ export default {
 }
 .links{
   justify-self: end;
-  grid-template-columns:  auto auto auto;
+  grid-template-columns:  auto auto auto auto auto;
   display: grid;
   grid-gap: 10px;
   padding-right: 50px;

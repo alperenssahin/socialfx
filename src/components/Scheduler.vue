@@ -1,25 +1,41 @@
 <template>
   <div>
     <div v-if="loader">
-        <Loader></Loader>
+        <Loader :progress-array="[{text:'Images are saving',progress:25,timeout:600},{text:'Trigger created',progress:70,timeout:1200},
+        {text:'Meta data saved',progress:90,timeout:1200},{text:'DONE',progress:100,timeout:1000}]"></Loader>
     </div>
     <diV class="release-box">
       <div>
         <div class="block" v-for="media in selectedSocialMedia" :key="media.size">
           <h2>{{media.title}}</h2>
           <div class="datepicker">
-            <h3>Select Release Date</h3>
+            <h3>Paylaşma Tarihi Seçin</h3>
             <md-datepicker v-model="media.releaseDate" />
           </div>
           <br>
           <label>
-            <h5>Select Release Time </h5><br>
-            <input type="time">
+            <h5> Paylaşma Saati Seçin </h5><br>
+            <input type="time" v-model="media.releaseTime">
           </label>
+          <div class="preview">
+            <img :src="socialMedia[media.size]">
+          </div>
         </div>
       </diV>
-      <button @click="releaseHandler">Release</button>
-    </div>
+      <div class="right-cenah">
+        <div class="datepicker">
+          <h3> Bütün Postlar İçin Paylaşma Tarihi Seçin</h3>
+          <md-datepicker v-model="generalDate" />
+        </div>
+        <br>
+        <label>
+          <h5> Bütün Postlar İçin Paylaşma Saati Seçin </h5><br>
+          <input type="time" v-model="generalTime">
+        </label>
+        <br>
+        <button class="release" @click="releaseHandler">Release</button>
+      </div>
+      </div>
   </div>
 
 </template>
@@ -32,12 +48,16 @@ export default {
   data(){
     return{
       loader:false,
+      generalTime:"",
+      generalDate:"",
       selectedSocialMedia:Object.keys(this.$props.socialMedia).map(size=>{
         if(this.$props.socialMedia[size]){
           return {
             size : size,
             title : size === "16:10" ? 'Twitter' : size === "9:16" || size === "5:7" ? "Instagram" : size === "4:3" ? "Facebook" : '',
             releaseDate:null,
+            releaseTime:null,
+            imgData:this.$props.socialMedia[size],
           }
         }else{
           return null;
@@ -46,9 +66,25 @@ export default {
     }
   },props:{
     socialMedia:Object,setTimeout:Function
-  },methods:{
+  },
+  watch:{
+    generalTime(val){
+      for(let s of this.selectedSocialMedia){
+        s.releaseTime = val;
+      }
+    },
+    generalDate(val){
+      for(let s of this.selectedSocialMedia){
+        s.releaseDate = val;
+      }
+    }
+  },
+  methods:{
     releaseHandler(){
       this.loader = true;
+      for(let post of this.selectedSocialMedia){
+        this.$store.commit("pushPost",post)
+      }
       this.$props.setTimeout()
     }
   }
@@ -56,6 +92,10 @@ export default {
 </script>
 
 <style scoped>
+  .right-cenah{
+    justify-self: center;
+    align-self: start;
+  }
   h2,h3,h5{
     color: var(--purple);
   }
@@ -82,7 +122,9 @@ export default {
     height: 60px;
     align-self: center;
     border-radius: 20px;
-    width: 200px;
     justify-self: center;
+  }
+  img{
+    max-width: 200px;
   }
 </style>

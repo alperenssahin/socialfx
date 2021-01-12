@@ -1,38 +1,32 @@
 <template>
   <div class="generator-box">
-
     <div class="scanvas"
          v-for="size in Object.keys(sizeArray).filter(key=>sizeArray[key])">
-      <SCanvas :img-data="background"
-               class="background-layer"
-               :size="size" v-if="size === selectedSize"
-               :image-setter="imageSetter"
-               :text="{title:title,subtitle:subtitle,info:info}"></SCanvas>
-<!--      <div class="background-layer" v-if="size === selectedSize"-->
-<!--           :style="{-->
-<!--        backgroundImage:`url('${background}')`,-->
-<!--        color:textColor,}">-->
-<!--        <div class="selement" :class="{-->
-<!--        nineSixteen:size==='9:16',-->
-<!--         sixteenTen:size==='16:10',-->
-<!--          sevenFive:size==='5:7',-->
-<!--           fourThree:size==='4:3',}"-->
-<!--          :style="{ height:`${height}px`,-->
-<!--        color:textColor,-->
-<!--        backgroundColor:overlayColor,-->
-<!--        width:`${height*size.split(':')[0]/size.split(':')[1]}px`}"-->
-<!--        >-->
-<!--          <div class="stitle">{{title}}</div>-->
-<!--          <div class="ssubtitle">-->
-<!--            <div v-for="item in subtitle.split('|')" :key="item">-->
-<!--              {{item}}-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="sinfo" >-->
-<!--            <div v-for="item in  info.split('|')" :key="item">{{item}}</div>-->
-<!--          </div>-->
-<!--           </div>-->
-<!--      </div>-->
+      <div class="background-layer" v-if="size === selectedSize"
+           :style="{
+        backgroundImage:`url('${background}')`,
+        color:textColor,}">
+        <div class="selement" :class="{
+        nineSixteen:size==='9:16',
+         sixteenTen:size==='16:10',
+          sevenFive:size==='5:7',
+           fourThree:size==='4:3',}"
+          :style="{ height:`${height}px`,
+        color:textColor,
+        backgroundColor:overlayColor,
+        width:`${height*size.split(':')[0]/size.split(':')[1]}px`}"
+        >
+          <div class="stitle">{{title}}</div>
+          <div class="ssubtitle">
+            <div v-for="item in subtitle.split('|')" :key="item">
+              {{item}}
+            </div>
+          </div>
+          <div class="sinfo" >
+            <div v-for="item in  info.split('|')" :key="item">{{item}}</div>
+          </div>
+           </div>
+      </div>
     </div>
     <div  class="select-size">
       <div v-for="size in Object.keys(sizeArray).filter(key=>sizeArray[key])">
@@ -47,13 +41,9 @@
 </template>
 
 <script>
-import SCanvas from "@/components/SCanvas";
 export default {
-  name: "Generator",
-  components: {SCanvas},
-  props:{title:String,background:String,subtitle:String,info:String,sizeArray:Object,
+  name: "Generator",props:{title:String,background:String,subtitle:String,info:String,sizeArray:Object,
     height:Number,
-    imageSetter:Function,
     textColor:{type:String,default:"#000"},
     overlayColor:{type:String,default:"#000"}},
   data(){
